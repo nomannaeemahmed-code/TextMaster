@@ -1,57 +1,86 @@
 import { click } from '@testing-library/user-event/dist/click';
-import {Container,Nav,Navbar} from 'react-bootstrap';
+import {Container,Nav,Navbar,Form} from 'react-bootstrap';
 import {useState} from 'react';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
-import Form from 'react-bootstrap/Form';
+// import Form from 'react-bootstrap/Form';
 
-function ColorSchemesExample() {
-const [click , setClick]= useState(false); 
+function ColorSchemesExample({onClick, mode}) {
+// const [click , setClick]= useState(false); 
 
-    const onHandlechage=()=>{
-        console.log('yes work ')
-        setClick(! click)
-    }
+    // const onHandlechage=()=>{
+    //     console.log('yes work ')
+    //     if (!click) {
+    //       document.body.className="Dark";
+    //     } else {
+    //       document.body.className="light";
+    //     }
+    //     setClick(!click)
+        
+    // }
+  
+
   return (
     <>
-      <Navbar bg="dark" data-bs-theme="dark">
+      <Navbar bg={mode ? "dark" : "light"} data-bs-theme={mode ? "dark":"light"}>
         <Container>
           <Navbar.Brand href="#home"> Text Analysis
 
           </Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-          </Nav>
-            <button onClick={onHandlechage}
+          
             
-            >{click ? "Dark Mood ": "Light Mood"} </button>
+{/* <Form> */}
+      <Form.Check // prettier-ignore
+        type="switch"
+        id="custom-switch"
+        // onClick={onHandlechage}
+        onClick={onClick}
+      label={mode? "Light Mood":"Dark Mode"}
+      style={{
+        color: mode? "white":"Black"
+      }}
 
+      />
+      
+    {/* </Form> */}
         </Container>
       </Navbar>
     </>
   );
 }
 
+// text Area 
 
-function FormFloatingTextareaExample({ value, onChange }) {
+function FormFloatingTextareaExample({ value, onChange, mode }) {
   return (
     <>
             
         <Form.Control
+       
             as="textarea"
           value={value}
            onChange={onChange} 
           // placeholder="Leave a comment here"
-          style={{ height: '200px', width:'60%' }}
+          style={{
+             height: '200px', width:'60%' ,backgroundColor : mode ? "black":"white",
+            ...(mode &&{color:'white'})
+
+          }}
+          
         />
      
     </>
   );
 }
 
+// function SwitchExample() {
+//   return (
+    
+//   );
+// }
+
 
 export {
   ColorSchemesExample,
  FormFloatingTextareaExample,
+//  SwitchExample
 } 
