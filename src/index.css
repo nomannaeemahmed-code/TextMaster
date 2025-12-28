@@ -14,8 +14,36 @@ code {
 }
 
 body.Dark{
-  background-color: grey !important;
+  background-color: #1b1b1d !important;
 }
-body.light{
-  background-color: aquamarine  !important;
+/* body.light{ */
+  /* background-color: aquamarine  !important; */
+/* } */
+
+.text-color-dark{
+ color:#212529 ; 
+
+}
+.text-color-light{
+ color:#dee2e6 ; 
+
+}
+.body-div{
+  /* background-color: red; */
+  display: flex;
+  width: 60%;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  gap: 5px;
+  /* align-items: center; */
+  margin: 0 auto;
+
+}
+.img-dark{
+  filter: invert(100%);
+}
+
+.img-light{
+  filter: none;
+
 }

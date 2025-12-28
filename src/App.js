@@ -1,16 +1,17 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import  { ColorSchemesExample, FormFloatingTextareaExample } from './component/Navbar'
-
+import Alert from './component/Alert'
 import { useState } from 'react';
-
+// import About  from './component/About';
 import { Button, Container } from 'react-bootstrap'; 
-
+import About from './component/About';
+import  Router  from './component/Router';
 
 
 function App() {
 const [text , setText]=useState('')
 const [mode , setMode]=useState(false)
-
+const[showAlert , setShowAlert]=useState(false)
 const modehandleBtn=()=>{
 if (!mode) {
    document.body.className="Dark"
@@ -45,38 +46,47 @@ const capitallizebtn=()=>{
   }
   const CopyBtn=()=>{
     navigator.clipboard.writeText(text)
-    .then(()=>{
-      alert('Copy Text');
-    })
-    .catch((err)=>{
-      alert('not copy'+err)
-    })
+   
+    setShowAlert(true);
+     setTimeout(() => {
+      setShowAlert(false)
+     }, 1500);
+
   }
   
 
   return ( 
     <div>
       <ColorSchemesExample onClick={modehandleBtn} mode={mode} />
-      <br />
+      {showAlert && <Alert />}
 
-      <h1>Text</h1>
       <br />
+       <div className='body-div'>
+      <h2  className={!mode ? 'text-color-dark':'text-color-light'}>Enter Text</h2>
+      <p  className={!mode? 'text-color-dark': 'text-color-light'}>Copy and paste, or type text into the box below. Then click ANALYSE. You can also analyse multiple documents by separating them with '#' or any other delimiter token. If you want to do this, tick split and choose the delimiter in the options below.</p>
       <FormFloatingTextareaExample value={text} onChange={inputField} mode={mode}  />
       <br />
-      <Container  style={{display:'flex', gap:'10px'}}>
+      <div  style={{display:'flex', gap:'10px'}}>
       <Button variant="primary" onClick={clickbtn}>Convert to UpperCase</Button>
       <Button variant="info" onClick={capitallizebtn}>Convert to capitilize</Button>
       <Button variant="success" onClick={lowercasebtn}>Convert to lowerCase</Button>
       <Button variant="danger" onClick={clear}>Clear Text</Button>
-      <Button variant="basic" onClick={CopyBtn}>Copy Text</Button>
+      <Button variant="info" onClick={CopyBtn}>Copy Text</Button>
 
- </Container>
+ </div>
  <br />
-      <p>Word Count {text.split(" ").length} character count {text.length}</p>
+ 
+ <h5 className={!mode ? "text-color-dark":"text-color-light"}>Words Count : {text.split(" ").length} </h5>
+      
+      <h5 className={!mode ? "text-color-dark":"text-color-light"} > characters count : {text.length}</h5>
+       </div>
+      
 
 
 
       {/* <SwitchExample /> */}
+      {/* <About /> */}
+      <Router />
     </div>
   );
 }
